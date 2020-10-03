@@ -33,10 +33,10 @@ public class UI {
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
 	//metodo que limpa o terminal e mantem o ultimo tabuleiro atualizado
-	public static void clearScreen(){
+	public static void clearScreen() {
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
-	}
+	}	
 
 	public static ChessPosition readChessPosition(Scanner sc) {
 		try {
@@ -46,7 +46,7 @@ public class UI {
 			return new ChessPosition(column, row);
 		}
 		catch (RuntimeException e) {
-			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
+			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8.");
 		}
 	}
 	
@@ -54,16 +54,17 @@ public class UI {
 		printBoard(chessMatch.getPieces());
 		System.out.println();
 		printCapturedPieces(captured);
-		System.out.println("Turn: " + chessMatch.getTurn());
-		if(!chessMatch.getCheckMate()) {
+		System.out.println();
+		System.out.println("Turn : " + chessMatch.getTurn());
+		if (!chessMatch.getCheckMate()) {
 			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-			if(chessMatch.getCheck()) {
+			if (chessMatch.getCheck()) {
 				System.out.println("CHECK!");
 			}
 		}
 		else {
 			System.out.println("CHECKMATE!");
-			System.out.println("Winner: "+ chessMatch.getCurrentPlayer());
+			System.out.println("Winner: " + chessMatch.getCurrentPlayer());
 		}
 	}
 	
@@ -77,6 +78,7 @@ public class UI {
 		}
 		System.out.println("  a b c d e f g h");
 	}
+
 	
 	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
 		for (int i = 0; i < pieces.length; i++) {
@@ -90,10 +92,10 @@ public class UI {
 	}
 
 	private static void printPiece(ChessPiece piece, boolean background) {
-    	if(background) {
-    		System.out.println(ANSI_BLUE_BACKGROUND);
-    	}
-		if (piece == null) {
+		if (background) {
+			System.out.print(ANSI_BLUE_BACKGROUND);
+		}
+    	if (piece == null) {
             System.out.print("-" + ANSI_RESET);
         }
         else {
@@ -121,5 +123,4 @@ public class UI {
 		System.out.println(Arrays.toString(black.toArray()));
 		System.out.print(ANSI_RESET);
 	}
-
 }
